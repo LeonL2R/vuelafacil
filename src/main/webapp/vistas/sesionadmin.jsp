@@ -25,58 +25,51 @@
         <link rel="stylesheet" href="/vuelafacil/css/jquery-ui.min.css">
         <script src="/vuelafacil/js/jquery-3.6.0.min.js"></script>
         <script src="/vuelafacil/js/jquery-ui.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">   		
+        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/style.css"> 
         <script> 
         $( function() {
             $( "#fecha" ).datepicker()({
         });
-        } );
-        
-        </script> 
+        } );        
+        </script>
     </head>
     <body> 
-        <h1><a href="/vuelafacil/RutasController?opcion=index2"> Colombia's Airplanes! </a> </h1>
-        <h2 align="center">Bienvenido <%=sesion.getAttribute("nombre")%> <%=sesion.getAttribute("apellido")%></h2>
-
-        <div align="right">
-            <a href="/vuelafacil/UsuariosController?opcion=datosusuario">Mis datos personales</a>
-            <a href="/vuelafacil/index.jsp?cerrar=true">Cerrar sesion</a>
-            <hr>   
+        <div class="encabezado">
+            <a href="RutasController?opcion=index"><img src="img/icono.png" style="width: 100px; height: 100px;" href="RutasController?opcion=index"/> </a>
+            <td> <h1><a style="text-decoration:none; " href="/vuelafacil/RutasController?opcion=index2" class="text-white"> Colombia's Airplanes! </a> </h1> </td> 
+        </div>       
+        <div align="right" class="opciones">
+            <a href="/vuelafacil/UsuariosController?opcion=datosusuario" class="sesion">Mis datos personales</a>
+            <a href="/vuelafacil/index.jsp?cerrar=true" class="sesion">Cerrar sesion</a>   
         </div>
-        <h2>Crear Rutas</h2>      
-        <form action="/vuelafacil/RutasController" method="post" autocomplete="off">      
-            <input type="hidden" name="opcion" value="guardar">           
-            <table>
-                <tr>
-                    <td>IdRuta:</td>
-                    <td><input type="text" name="idruta" size="30"/></td>
-                </tr> 
-                <tr>
-                    <td>Origen:</td>
-                    <td><input type="text" name="origen" size="30"/></td>
-                </tr> 
-                <tr>
-                    <td>Destino:</td>
-                    <td><input type="text" name="destino" size="30"/></td>
-                </tr>
-                <tr>
-                    <td>Fecha:</td>
-                    <td><input type="text" name="fecha" id="fecha" size="30"/></td>
-                </tr>
-                <tr>
-                    <td>Hora:</td>
-                    <td><input type="time" name="hora" id="hora" size="30"/></td>
-                </tr>
-                <tr>
-                    <td>Puestos:</td>
-                    <td><input type="text" name="puestos" size="30"/></td>
-                </tr>
-                <tr>
-                    <td>Precio:</td>
-                    <td><input type="text" name="precio" size="30"/></td>
-                </tr>
-            </table>
-            <br>
-            <input type="submit" value="Guardar"/>
-        </form>       
+        <section class="form-crearrutas">
+            <h2>Crear Rutas</h2>      
+            <form action="/vuelafacil/RutasController" method="post" autocomplete="off">      
+                <input type="hidden" name="opcion" value="guardar">           
+                <table>
+                    <tr>
+                        <td>IdRuta:<br>
+                        <input type="text" name="idruta" class="controlcrruta"/></td>
+                        <td>Origen:<br>
+                        <input type="text" name="origen" class="controlcrruta"/></td>
+                        <td>Destino:<br>
+                        <input type="text" name="destino" class="controlcrruta"/></td>
+                        <td>Fecha:<br>
+                        <input type="text" name="fecha" id="fecha" class="controlcrruta"/></td>
+                    </tr>
+                    <tr>
+                        <td>Hora:<br>
+                        <input type="time" name="hora" id="hora" class="controlcrruta"/></td>
+                        <td>Puestos:<br>
+                        <input type="text" name="puestos" class="controlcrruta"/></td>
+                        <td>Precio:<br>
+                        <input type="text" name="precio" class="controlcrruta"/></td>
+                        <td><input type="submit" value="Crear ruta" class="boton-crruta"/></td>
+                    </tr>
+                </table>                
+            </form>
+        </section>
     </body>
 </html>

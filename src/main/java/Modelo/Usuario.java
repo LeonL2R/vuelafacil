@@ -11,13 +11,14 @@ package Modelo;
  */
 public class Usuario {
     
-    private String idusuario, nombre, apellido, telefono, contrasena, nivel;
+    private String idusuario, nombre, apellido, telefono, email, contrasena, nivel;
 
-    public Usuario(String idusuario, String nombre, String apellido, String telefono, String contrasena, String nivel) {
+    public Usuario(String idusuario, String nombre, String apellido, String telefono, String email, String contrasena, String nivel) {
         this.idusuario = idusuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
+        this.email = email;
         this.contrasena = contrasena;
         this.nivel = nivel;
     }
@@ -57,6 +58,14 @@ public class Usuario {
         this.telefono = telefono;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getContrasena() {
         return contrasena;
     }
@@ -75,9 +84,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idusuario=" + idusuario + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", contrasena=" + contrasena + ", nivel=" + nivel + '}';
+        return "Usuario{" + "idusuario=" + idusuario + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", email=" + email + ", contrasena=" + contrasena + ", nivel=" + nivel + '}';
     }
-    
-    
-    
+
 }

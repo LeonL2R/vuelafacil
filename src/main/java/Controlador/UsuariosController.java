@@ -35,7 +35,10 @@ public class UsuariosController extends HttpServlet {
             //----------------------------Redireccionameiento Crear Usuario---------------------------            
         } else if (opcion.equals("crearusuario")){
             RequestDispatcher resquestDispatcher= request.getRequestDispatcher("/vistas/crearusuario.jsp");
-            resquestDispatcher.forward(request, response); 
+            resquestDispatcher.forward(request, response);
+        } else if (opcion.equals("sesionadmin")) {
+            RequestDispatcher resquestDispatcher= request.getRequestDispatcher("/vistas/sesionadmin.jsp");
+            resquestDispatcher.forward(request, response);
         } else if (opcion.equals("datosusuario")){
             //---------------------------Redirecionamiento mi datoas Personales------------------------------
             Usuario usuario = new Usuario ();
@@ -73,6 +76,7 @@ public class UsuariosController extends HttpServlet {
                     String nombre = request.getParameter("nombre");
                     String apellido = request.getParameter("apellido");
                     String telefono = request.getParameter("telefono");
+                    String email=request.getParameter("email");
                     String claveadmin=request.getParameter("claveadmin");
                     String nivel="2";
                     
@@ -86,11 +90,14 @@ public class UsuariosController extends HttpServlet {
                         //--------------agregar mensaje-----------------
                     }else if (contrasena.isEmpty() || !contrasena.equals(contrasenacon)){
                         //--------------agregar mensaje-----------------
+                    }else if(email.isEmpty()) {
+                      //--------------agregar mensaje-------------------------
                     }else if (contrasena.equals(contrasenacon)) {
                         usuario.setIdusuario(idusuario);
                         usuario.setNombre(nombre);
                         usuario.setApellido(apellido);
                         usuario.setTelefono(telefono);
+                        usuario.setEmail(email);
                         usuario.setContrasena(contrasena);
                         usuario.setNivel(nivel);
                         try {
@@ -119,6 +126,7 @@ public class UsuariosController extends HttpServlet {
                                 request.setAttribute("nombre", usuario.getNombre());
                                 request.setAttribute("apellido", usuario.getApellido());
                                 request.setAttribute("telefono", usuario.getTelefono());
+                                request.setAttribute("email", usuario.getEmail());
                                 request.setAttribute("nivel", nivel);
                                 HttpSession sesion = request.getSession();
                                 sesion.setAttribute("nivel", nivel); 
@@ -143,17 +151,19 @@ public class UsuariosController extends HttpServlet {
                     String nombre = request.getParameter("nombre");
                     String apellido = request.getParameter("apellido");
                     String telefono = request.getParameter("telefono");
+                    String email = request.getParameter("email");
                     
                     usuario.setIdusuario(idusuario);
                     usuario.setNombre(nombre);
                     usuario.setApellido(apellido);
                     usuario.setTelefono(telefono);
+                    usuario.setEmail(email);
                     usuario.setContrasena("contrasena");
                     usuario.setNivel(nivel);
                     
                     if (nombre.isEmpty() || apellido.isEmpty()){
                     //---------agregar mensaje------------------
-                    }else if (telefono.isEmpty()){
+                    }else if (telefono.isEmpty() || email.isEmpty()){
                         //----------agregar mensaje------------
                     } else { 
                         try {
@@ -162,6 +172,7 @@ public class UsuariosController extends HttpServlet {
                             sesion.setAttribute("nombre", usuario.getNombre());
                             sesion.setAttribute("apellido", usuario.getApellido());
                             sesion.setAttribute("telefono", usuario.getTelefono());
+                            sesion.setAttribute("email", usuario.getEmail());
                         } catch (SQLException ex) {
                         }
                     }
@@ -177,6 +188,7 @@ public class UsuariosController extends HttpServlet {
                     String nombre=sesion.getAttribute("nombre").toString();
                     String apellido=sesion.getAttribute("apellido").toString();
                     String telefono=sesion.getAttribute("telefono").toString();
+                    String email=sesion.getAttribute("email").toString();
                     String nivel=sesion.getAttribute("nivel").toString();
                     String contrasena=request.getParameter("contrasena");
                     String contrasenacon=request.getParameter("contrasenacon");
@@ -184,6 +196,7 @@ public class UsuariosController extends HttpServlet {
                     usuario.setNombre(nombre);
                     usuario.setApellido(apellido);
                     usuario.setTelefono(telefono);
+                    usuario.setEmail(email);
                     usuario.setContrasena(contrasena);
                     usuario.setNivel(nivel);
                     if (contrasena.isEmpty() || contrasenacon.isEmpty()){

@@ -11,30 +11,32 @@
 <html>
     <head>          
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.min.css">   		
+        <script src="js/bootstrap.min.js"></script> 
+        <link rel="stylesheet" href="css/style.css">  
         <title>Inicio de sesión</title>        
     </head>
-    <body>
-        <h1><a href="/vuelafacil/RutasController?opcion=index"> Colombia's Airplanes! </a> </h1>
-        <h2>Iniciar Sesión</h2>
-        <form action="/vuelafacil/UsuariosController" method="post" autocomplete="off">      
-            <input type="hidden" name="opcion" value="iniciarsesion">    
-            <table>
-                <tr>
-                    <td>Número de identificación:</td>
-                    <td><input type="text" name="idusuario" size="30"/></td>
-                </tr> 
-                <tr>
-                    <td>Contraseña</td>
-                    <td><input type="text" name="contrasena" size="30"/></td>
-                </tr>
-            </table>
-            <br>
-            <input type="submit" value="Iniciar sesion"/>            
-        </form>
-        <br>
-        <tr> 
-            <td> <a href="/vuelafacil/UsuariosController?opcion=crearusuario"> Crear Usuario </a> </td> 
-        </tr>
+    <body> 
+        <div class="encabezado">
+            <a href="RutasController?opcion=index"><img src="img/icono.png" style="width: 100px; height: 100px;" href="RutasController?opcion=index"/> </a>
+            <h1><a style="text-decoration:none; " href="RutasController?opcion=index" class="text-white"> Colombia's Airplanes! </a> </h1>
+        </div>
+        <section class="form-login">
+            <h5>Formulario Login</h5>
+            <form action="/vuelafacil/UsuariosController" method="post" autocomplete="off">
+                <input type="hidden" name="opcion" value="iniciarsesion">    
+                <table>
+                    <tr>
+                        <td><input type="text" name="idusuario" class= "controls" placeholder="Número de identificación"/></td>
+                    </tr> 
+                    <tr>
+                        <td><input type="text" name="contrasena" class= "controls" placeholder="Contraseña"/></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Iniciar sesion" class="botonlogin"/>
+                <p> <a href="/vuelafacil/UsuariosController?opcion=crearusuario"> Crear Usuario </a> </p>
+            </form>
+        </section>
    
         <%
             HttpSession sesion = request.getSession(); 
@@ -44,14 +46,15 @@
                 sesion.setAttribute("nombre", request.getAttribute("nombre"));
                 sesion.setAttribute("apellido", request.getAttribute("apellido"));
                 sesion.setAttribute("telefono", request.getAttribute("telefono"));
+                sesion.setAttribute("email", request.getAttribute("email"));
                 sesion.setAttribute("nivel", nivel);
                 if (nivel.equals("1")) {
-                    response.sendRedirect("vistas/sesionadmin.jsp");
+                    response.sendRedirect("/vuelafacil/UsuariosController?opcion=sesionadmin");
                 } else if (nivel.equals("2")){
                     response.sendRedirect("index.jsp");
                     request.setAttribute("nivel", "2");
                     }
                 }
-        %>            
+        %>    <-<!-- LOGIN -->        
     </body>
 </html>

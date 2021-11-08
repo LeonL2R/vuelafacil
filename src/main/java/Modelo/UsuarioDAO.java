@@ -23,15 +23,16 @@ public class UsuarioDAO {
         
         try {
             connection.setAutoCommit(false);
-            String sql="INSERT INTO usuarios (Idusuario, Nombre, Apellido, Telefono, Contrasena, Nivel) VALUES (?,?,?,?,?,?)";
+            String sql="INSERT INTO usuarios (Idusuario, Nombre, Apellido, Telefono, Email, Contrasena, Nivel) VALUES (?,?,?,?,?,?,?)";
             ps=connection.prepareStatement(sql);
         
             ps.setString(1, usuario.getIdusuario());
             ps.setString(2, usuario.getNombre());
             ps.setString(3, usuario.getApellido());
             ps.setString(4, usuario.getTelefono());
-            ps.setString(5, usuario.getContrasena());
-            ps.setString(6, usuario.getNivel());
+            ps.setString(5, usuario.getEmail());
+            ps.setString(6, usuario.getContrasena());
+            ps.setString(7, usuario.getNivel());
         
             estadoOp=ps.executeUpdate()>0;
         
@@ -59,8 +60,9 @@ public class UsuarioDAO {
 		usuario.setNombre(rs.getString(2));
 		usuario.setApellido(rs.getString(3));
 		usuario.setTelefono(rs.getString(4));
-		usuario.setContrasena(rs.getString(5));
-                usuario.setNivel(rs.getString(6));
+                usuario.setEmail(rs.getString(5));
+		usuario.setContrasena(rs.getString(6));
+                usuario.setNivel(rs.getString(7));
                 }
             } catch (SQLException e) {
                 }
@@ -72,13 +74,14 @@ public class UsuarioDAO {
 	connection = obtenerConexion();
 	try {
 		connection.setAutoCommit(false);
-		String sql = "UPDATE usuarios SET Nombre=?, Apellido=?, Telefono=? WHERE Idusuario=?";
+		String sql = "UPDATE usuarios SET Nombre=?, Apellido=?, Telefono=?, Email=? WHERE Idusuario=?";
 		ps = connection.prepareStatement(sql);
                 
 		ps.setString(1, usuario.getNombre());
                 ps.setString(2, usuario.getApellido());
                 ps.setString(3, usuario.getTelefono());
-                ps.setString(4, usuario.getIdusuario()); 
+                ps.setString(4, usuario.getEmail());
+                ps.setString(5, usuario.getIdusuario()); 
 
 
 		estadoOp = ps.executeUpdate() > 0;
